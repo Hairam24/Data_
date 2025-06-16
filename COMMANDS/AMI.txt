@@ -1,0 +1,40 @@
+AMI 
+
+create a instance in N.Virginia
+
+create a volume and attach with instance
+
+first instance: 
+
+ sudo su -
+ yum install httpd -y
+ mkfs.ext4 /dev/sdb
+ mkdir /data
+ mount /dev/xvdb /data/
+ df -h
+ cd /data
+ touch devops.txt{1..10}
+ ll
+ 
+create a AMI from the instance 
+(after available)
+
+copy the AMI to other region
+(after available)
+ 
+Launch the Instance from the AMI
+
+
+Second Instance:
+
+
+ sudo su -
+ yum install httpd -y
+ lsblk
+ resize2fs /dev/xvdb
+         (if shows error then run : e2fsck -f /dev/xvdb   and run the above cmd again )
+ mkdir /data
+ mount /dev/xvdb /data/
+ df -h
+ cd /data
+ ll

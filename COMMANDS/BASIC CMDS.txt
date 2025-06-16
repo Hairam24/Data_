@@ -1,0 +1,59 @@
+BASIC CMDS
+
+sudo su -
+su -
+whoami
+who
+hostname
+hostnamectl set-hostname server.example.com
+bash
+hostnamectl   ----->details
+uname
+uname -a
+uname -r
+cat /etc/os-release
+ll
+clear
+ls
+mkdir project  ----->directory
+cd project
+mkdir /project ------>repo
+cd 
+cd ..
+cd /etc/
+ll
+su - hari
+pwd --->present working directory
+cd /home/
+ll
+cat /proc/
+free -h
+ls
+touch hari
+rm hari ---->warning
+alias
+alisa cd="rm"
+exit
+vim hari.txt  ----->to edit
+cat hari.txt   -----> to view
+/root
+head -n 5 /etc/passwd > hari       >=reditecting
+cat hari
+tail -n 5 /etc/passwd > hari       >=reditecting
+cat hari
+useradd hari
+passwd hari
+vim /etc/passwd
+vim /etc/shadow
+usermod --help
+usermod -s ironman
+usermod -s /sbin/nologin ironmam     ---->block user
+cat /etc/passwd | grep -i ironman
+usermod -s /bin/bash ironman -------->unblock
+chown ironman : ironman ironman
+       (owner)  (group name)  (resource)
+whereis passwd
+whereis useradd
+vim /etc/sudoers
+    hari ALL=(ALL)  ____,____,!____
+sudo useradd kk

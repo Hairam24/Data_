@@ -1,0 +1,64 @@
+JENKINS DEV
+
+DEV: (t2.micro 8GB)
+ sudo su -
+ hostnamectl set-hostname server.example.com
+ bash
+ yum install git -y
+ ssh-keygen
+ cd .ssh/
+ cat id_rsa.pub
+ (copy paste it in git setting add ssh)
+ cd Sanjay
+ git init
+ git add .
+ git commit -m "first commit"
+ git branch -M main
+ (use your link ) git remote add origin git@github.com:Hairam24/test.git    (use ssh)
+ git push -u origin main
+
+
+JENKINS: (t2.medium 12GB)
+
+ sudo su -
+ hostnamectl set-hostname jenkins.example.com
+ bash
+ yum update –y
+ wget -O /etc/yum.repos.d/jenkins.repo \
+     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+ rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+ yum upgrade
+ yum install java-17-amazon-corretto -y
+ yum install jenkins -y
+ systemctl enable Jenkins
+ systemctl start Jenkins
+ systemctl status Jenkins
+ yum install git -y
+ yum install maven
+ mvn -v  (copy the path for java and maven and paste it in Dashboard > manage Jenkins > tools > add java , maven )
+
+
+ ip:8080 open this using public ip
+
+
+ cat /var/lib/jenkins/secrets/initialAdminPassword   ( copy the key and paste it in Jenkins)
+ ( configure Jenkins)
+
+ add the webhook (Jenkins > profile > security > add key (copy key) > go to git repo setting > add webhook > ip:8080/github-webhook/
+                                                                                                             json
+                                                                                                             paste key
+                                                                                                             add webhook
+
+ Dashboard > manage plugin > available plugin > install maven, GitHub in, deployer
+ 
+ copy the path for java and maven and paste it in Dashboard > manage Jenkins > tools > add java , maven
+
+ new iteam > maven project > ok > paste git http link  and change /master to /main > save and apply 
+
+ Build now
+ 
+ copy the cat path and paste it in the Jenkins cli as : cd /var/.......... (past the output)
+ 
+ DOCUMENT THE OUTPUT
+
+ TOMCAT LINK : https://medium.com/@raguyazhin/step-by-step-guide-to-install-apache-tomcat-on-amazon-linux-120748a151a9

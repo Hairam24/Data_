@@ -1,0 +1,32 @@
+HTTPD
+
+Run in CLI :
+
+ sudo su -
+ hostnamectl set-hostname server.example.com
+ bash
+ yum install httpd -y
+ cd /var/www/html
+ echo "This is my web sever" > index.html
+ ll
+ cat index.html
+ systemctl restart httpd
+ systemctl enable httpd
+ 
+
+
+USE while creating instances in additional settings :
+
+ #! /bin/bash
+ yum install httpd -y
+ cd /var/www/html
+ echo "This is my web sever" > index.html
+ systemctl restart httpd
+ systemctl enable httpd
+ useradd hari -p redhat -c "user created"
+
+ LAUNCH
+
+ TO SEE in web http://public_ip
+
+ (MAKE SURE YOU ENABLED : ALL ICMP IPv4 (imp), HTTP, HTTPS, SSH, 8080, 8081)
