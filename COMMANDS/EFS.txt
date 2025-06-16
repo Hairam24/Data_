@@ -1,0 +1,57 @@
+EFS file creation
+
+fist create a security group with NFS inbound rule  (nfs-sg)
+
+next create a EFS file system 
+
+go to networks and click the manage after creation(available)
+add the security group
+
+next click attach then select IP attach 
+copy the first sudo link
+
+Create 3 instances with amazon (1a subnet), Redhat (1b), Ubuntu(1a)
+amazon : 
+ sudo su -
+ yum install nfs-utils -y
+ systemctl restart nfs-utils
+ systemctl enable nfs-utils
+ mkdir efs
+ cd
+ (past the sudo link)
+ df -h
+ cd /root/efs
+ touch index.html
+ ll
+
+redhat:
+ sudo su -
+ yum install nfs-utils -y
+ systemctl restart nfs-utils
+ systemctl enable nfs-utils
+ mkdir efs
+ cd
+ (past the sudo link)
+ df -h              
+ cd /root/efs
+ touch index.html
+ ll
+
+ubuntu :
+ sudo su -
+ apt-get update
+ apt install nfs-common
+ (no restart required)
+ mkdir efs
+ cd
+ (paste the sudo link)
+ df -h              
+ cd /root/efs
+ touch index.html
+ ll
+
+
+make sure file reflected in all
+
+to remove access remove the zone 1b and check if not then cheet
+ 

@@ -1,0 +1,19 @@
+S3 Bucket creation
+
+Go to S3 and create bucket by naming unique name and allow
+     general purpose
+     ACLs enabled
+     Uncheck the Block Public Access
+     Enable bucket versioning
+Then click create
+
+
+-> upload anything and click that . Go to permission and enable read read for public and check whether the link is ppening
+
+-> Upload the website resources make sure index.html is directly on the s3 bucket and select all then > actions > Make public using ACL
+
+
+-->For static website go to the bucket > properties > static website hosting > enable > type index.html and save
+
+-> then click the static web link , your website will be displayed
+

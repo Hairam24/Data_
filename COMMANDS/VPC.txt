@@ -1,0 +1,89 @@
+VPC
+
+VLSM Calculator : 10.0.0.0/16  subnet 2   150,200
+
+Choose N.Virginia
+
+Create a VPC 
+  vpc only
+  my-vpc
+  10.0.0.0/16
+  create vpc
+
+
+Create Internet Gateway
+  
+Attach internet gateway with my-vpc
+
+Create Public subnet
+  choose my-vpc
+  Public-subnet
+  Zone us-east-1a
+  10.0.0.0/24
+  create subnet
+
+Create Private subnet
+  choose my-vpc
+  private-subnet
+  zone us-east-1b
+  10.0.1.0/25
+  create subnet
+
+Create NAT gateway
+  my-nat-gateway
+  public-subnet
+  public
+  allocate elastic ip
+  create nat gateway
+
+Create Public Route tables
+  public-route
+  my-vpc
+  actions > edit subnet associations > choose public-subnet > save
+  actions > edit route > add route > choose internet gateway and my-internet-gateway > choose 0.0.0.0.0.0
+
+Create Private Route tables
+  private-route
+  my-vpc
+  actions > edit subnet associations > choose private-subnet > save
+  actions > edit route > add route > choose NAT gateway and my-nat-gateway > choose 0.0.0.0.0.0
+
+Create Public INSTANCE
+  public
+  existing key
+  my-vpc
+  public-subnet
+  public ip - enable
+  create security group
+      ssh
+      all ICMP-IPv4   >  0.0.0.0.0.0
+      http            >  0.0.0.0.0.0
+  launch instance
+
+Create private INSTANCES
+  private
+  new-key
+  my-vpc
+  private-subnet
+  public ip - disable
+  create security group
+      ssh
+      all ICMP-IPv4   >  0.0.0.0.0.0
+      http            >  0.0.0.0.0.0
+  launch instance
+
+
+---> Open Public Instance
+
+sudo su -
+yum install httpd -y
+vim /var/www/html/index.html
+systemctl restart httpd
+systemctl enable httpd
+vim private.pem          (key-name)
+chmod 400 private.pem
+    
+---> ssh -i "private.pem" ec2-user@10.0.1.93   (Connect the private instance)
+
+ping google.com   ( if not work then connect the NAT gateway properly )
+  

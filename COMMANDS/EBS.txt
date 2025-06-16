@@ -1,0 +1,45 @@
+EBS file creation
+
+create two instances in different regions (N.virginia and Ohio)
+
+create a volume and attach with the instance (action > attach )(device name /dev/sdb ) and add the file
+
+create a snapshot from volume
+
+Copy the snapshot to the other region (choose  us-east-2) 
+
+create a volume from the snapshot
+
+In first Instance (N.Virginia)
+ sudo su -
+ lsblk
+ mkfs.ext4 /dev/sdb
+ mkdir /data
+ mount /dev/xvdb /data/
+ df -h
+ cd /data
+ touch devops.txt{1..10}
+ ll
+
+
+(after volume is attached to 2nd instance)
+
+
+In the second instance (Ohio)
+ sudo su -
+ lsblk
+ resize2fs /dev/xvdb
+         (if shows error then run : e2fsck -f /dev/xvdb   and run the above cmd again )
+ mkdir /data
+ mount /dev/xvdb /data/
+ df -h
+ cd /data
+ ll
+
+
+(All files should be displayed)
+
+cd
+umount /data   (or)   umount -a
+
+(Files gone)

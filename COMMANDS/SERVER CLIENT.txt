@@ -1,0 +1,79 @@
+SERVER CLIENT
+
+enable all ICNP IPv4, HTTP, HTTPS, TCP           Others : 8080, 8081
+ping ip ---to check connection (enable all ICMP Ipv4)
+
+-------> Server
+
+sudo su -
+hostnamectl set-hostname server.example.com
+bash
+ip a s
+hostname
+vim /etc/hosts
+cat /etc/hosts
+vim /etc/ssh/sshd_config
+  permit 5 Things
+systemctl restart sshd
+systemctl enable sshd
+mkdir /project/
+cd /project/
+yum install git
+git init --bare
+
+
+
+--------> Client 1
+
+sudo su -
+hostnamectl set-hostname client1.example.com
+bash
+ip a s
+hostname
+vim /etc/hosts
+cat /etc/hosts
+ssh-keygen
+ssh-copy-id root@server.example.com
+ssh root@server.example.com           (to check connection)
+exit
+mkdir /project-x/
+cd /project-x/
+yum install git
+git init
+vim index.txt
+git add index.txt
+git commit -m "first" index.txt
+git remote add origin root@server.example.com:/project
+git remote -v
+git push origin master
+
+git remote remove origin   (if required use it)
+
+
+--------> Client 2
+
+sudo su -
+hostnamectl set-hostname client1.example.com
+bash
+ip a s
+hostname
+vim /etc/hosts
+cat /etc/hosts
+ssh-keygen
+ssh-copy-id root@server.example.com
+ssh root@server.example.com           (to check connection)
+exit
+mkdir /project-y/
+cd /project-y/
+yum install git
+git init
+git remote add origin root@server.example.com:/project
+git pull origin master
+
+ll
+(file will be displayed)
+
+git remote remove origin   (if required use it)
+
+
+
