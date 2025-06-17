@@ -83,6 +83,7 @@ After that check ping connection :
  Hi
  (ctrl + d)-- to save
  scp hari.txt root@(opposite region private ip):/tmp
+ scp hari.txt root@(opposite region private ip):/mnt -----this one crt
 
 Use this and check whether data is transferred.
 
