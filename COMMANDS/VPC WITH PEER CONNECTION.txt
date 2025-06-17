@@ -69,7 +69,7 @@ VPC (N.Virginia) > peer connections > peer name > zone: us-east-2 > select vpc >
 
 once added ACCEPT it in the Ohio vpc peering
 
-Then in both region route table > edit routes > select peer connection and CIDR vice versa 
+Then in both region public route table > edit routes > select peer connection and CIDR vice versa 
    N.Virginia : 20.0.0.0/16
    Ohio : 10.0.0.0/16
 
