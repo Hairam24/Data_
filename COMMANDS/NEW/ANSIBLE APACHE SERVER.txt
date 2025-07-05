@@ -1,0 +1,79 @@
+ANSIBLE APACHE SERVER:
+
+(website will be hosted in 8080 port with public ip of worker node)
+
+same as ansible setup MASTER ans WORKER nodes created and configured:
+
+simple.yaml
+(add ansible.cfg file)
+(create a index.html file in /etc/ansible)
+
+
+############################################################################################################################
+(SIMPLE WITHOUT PORT)
+
+---
+- name: This is a sample playbook
+  hosts: all
+ 
+  tasks:
+    - name: Installing Apache
+      yum:
+        name: httpd
+        state: present
+ 
+    - name: Copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+ 
+    - name: Start and enable httpd
+      systemd:
+        name: httpd
+        state: started
+        enabled: true
+...
+
+
+##########################################################################################################################
+(WITH PORT)
+
+
+---
+- name: Configure Apache to run on port 8080
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: Change Apache listen port to 8080
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        line: 'Listen 8080'
+        backup: yes
+
+    - name: Update VirtualHost to use port 8080
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '<VirtualHost \*:80>'
+        replace: '<VirtualHost *:8080>'
+        backup: yes
+
+    - name: Copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: apache
+        group: apache
+        mode: '0644'
+
+    - name: Start and enable Apache
+      systemd:
+        name: httpd
+        state: restarted
+        enabled: true
