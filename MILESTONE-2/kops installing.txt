@@ -1,0 +1,33 @@
+kops installing
+
+root@kops:~# history
+    1  apt install unzip -y
+    2  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    3  apt install unzip -y
+    4  unzip awscliv2.zip
+    5  sudo ./aws/install
+    6  aws --version
+    7  aws configure
+    8  cd .aws/
+    9  ls
+   10  cat config
+   11  cat  credentials
+   15  cd ..
+   16  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+   17  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+   18  kubectl version --client
+   19  curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+   20  chmod +x ./kops
+   21  sudo mv ./kops /usr/local/bin/
+   22  kops version
+   23  aws s3 mb s3://devops.k8s.nithya.in
+   24  aws s3 ls
+   25  export KOPS_STATE_STORE=s3://devops.k8s.nithya.in
+   26  ssh-keygen
+   27  cd .ssh/
+   28  ll
+   29  cat  id_rsa.pub
+   30  cd ..
+   33  kops create cluster --cloud=aws --zones=us-east-1a --name=devops.k8s.nithya.in --dns-zone=nithya.in --dns private
+   38  kops delete cluster --name=devops.k8s.nithya.in --yes
+   41  history

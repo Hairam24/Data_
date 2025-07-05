@@ -1,0 +1,62 @@
+saturday-21-6-25
+
+
+FROM ubuntu:18.04
+RUN apt-get update -y && apt-get install apache2 -y
+RUN apt-get install tree -y openssh-server openssh-client
+RUN cd /var/www/html
+RUN echo "hello Nithya" > /var/www/html/index.html
+RUN service apache2 start
+
+
+
+    1  yum install httpd -y
+    2  cd /var/www/html
+    3  echo "this is sample" > index.html
+    4  cat index.html
+    5  systemctl enable httpd
+    6  systemctl start httpd
+    7  yum install docker*
+    8*
+    9  cd
+   10  yum install docker*
+   11  vim Dokerfile
+   12  cat Dokerfile
+   13  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+   14  unzip awscliv2.zip
+   15  sudo ./aws/install
+   16  aws configure
+   17  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611058323943.dkr.ecr.us-east-1.amazonaws.com
+   18  docker build -t practice .
+   19  sudo systemctl start docker
+   20  sudo systemctl enable docker
+   21  sudo systemctl status docker
+   22  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611058323943.dkr.ecr.us-east-1.amazonaws.com
+   23  docker build -t practice .
+   24  cd /var/www/html
+   25  vim Dokerfile
+   26  cat Dokerfile
+   27  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611058323943.dkr.ecr.us-east-1.amazonaws.com
+   28  docker build -t practice .
+   29  vim Dockerfile
+   30  cat Dockerfile
+   31  sudo systemctl start docker
+   32  sudo systemctl enable docker
+   33  sudo systemctl status docker
+   34  cd
+   35  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611058323943.dkr.ecr.us-east-1.amazonaws.com
+   36  docker build -t practice .
+   37  ls -l
+   38  mv dokerfile Dockerfile
+   39  mv Dokerfile Dockerfile
+   40  docker build -t practice .
+   41  vim Dockerfile
+   42  docker build -t practice .
+   43  docker tag practice:latest 611058323943.dkr.ecr.us-east-1.amazonaws.com/practice:latest
+   44  docker push 611058323943.dkr.ecr.us-east-1.amazonaws.com/practice:latest
+   45  docker image ls
+   46  docker run -it --name web-one 611058323943.dkr.ecr.us-east-1.amazonaws.com/practice /bin/bash
+   47  docker ps -a
+   48  docker inspect web-one
+   49  curl http://172.17.0.2
+   50  history
