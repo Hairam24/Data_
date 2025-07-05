@@ -1,0 +1,106 @@
+TERRAFORM EC2 USER ADD:
+
+Install terraform, aws cli and configure it:
+
+mkdir /ec2
+cd /ec2
+vim ec2.tf (add the code)
+terraform init
+terraform fmt
+terraform validate
+terraform plan
+terraform apply
+
+
+terraform destroy (after all completion)
+
+
+##########################################################################################################################
+
+IN CREATED EC2:
+
+sudo su -
+lsblk
+mkfs.ext4 /dev/xvdb
+mkdir /data
+mount /dev/xvdb /data
+c /data
+touch hari.txt{1..10}
+ll
+
+############################################################################################################################
+code:
+
+resource "aws_security_group" "web_access" {
+  name        = "web_access"
+  description = "Allow traffic"
+ 
+  tags = {
+    Name = "web_access"
+  }
+}
+ 
+resource "aws_vpc_security_group_ingress_rule" "allow_http" {
+  security_group_id = aws_security_group.web_access.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
+ 
+resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
+  security_group_id = aws_security_group.web_access.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+ 
+resource "aws_vpc_security_group_ingress_rule" "allow_https" {
+  security_group_id = aws_security_group.web_access.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 443
+  ip_protocol       = "tcp"
+  to_port           = 443
+}
+resource "aws_vpc_security_group_egress_rule" "allow_all_taraffic" {
+  security_group_id = aws_security_group.web_access.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
+ 
+#ec2 instance code starts here
+resource "aws_instance" "custom-server" {
+  ami               = "ami-05ffe3c48a9991133"
+  availability_zone = "us-east-1a"
+  instance_type     = "t2.micro"
+  security_groups   = ["${aws_security_group.web_access.name}"]
+  key_name          = "aws_Ltimindtree"
+  #root disk
+  root_block_device {
+    volume_size           = "25"
+    volume_type           = "gp2"
+    delete_on_termination = true
+  }
+ 
+  #additional data disk
+  ebs_block_device {
+    device_name           = "/dev/xvdb"
+    volume_size           = "10"
+    volume_type           = "gp2"
+    delete_on_termination = true
+  }
+ 
+  user_data = <<-EOF
+        #!/bin/bash
+        sudo yum install httpd -y
+        sudo systemctl start httpd
+        sudo systemctl enable httpd
+        echo "<h1>custom  webserver using terraform</h1>" | sudo tee /var/www/html/index.html
+  EOF
+  tags = {
+    Name     = "hello-India"
+    Stage    = "testing"
+    Location = "India"
+  }
+}
