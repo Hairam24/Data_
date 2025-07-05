@@ -1,0 +1,28 @@
+Git basic commands syntax
+git merge vs rebase
+git reset vs revert
+Nine git branching stratergies + Medium
+ 
+ 
+Jenkins:
+1. different build triggers
+		diff between webhook vs poll scm vs build periodically
+2. Write a sample declarative Pipeline syntax for Jenkins
+3. How would you set up master slave conf in jenkins?
+4. What when where how why - Jenkins shared libraries
+5. What when where how why -  Parameterized jobs
+6. What when where how why -  Jenkins backup and restore methods
+7. What when where how why -  Role based access in Jenkins
+8. How would you establish ssh connectivity between two Jenkins nodes for master slave conf (say two AWS EC2 instances)
+ 
+Docker:
+1. Syntax of all basic and regularly used docker commands
+2. diff between cmd vs entry point
+ 
+Kubernetes:
+1. What when where how why -  deployment stratergies - blue green, rolling update, canary deployment
+2. What when where how why -  kubernetes architecture
+3. write a sample deployment descriptor yaml file
+ 
+Terraform:
+1. Write a sample terraform statefile to provision an ec2 instance using teraform
