@@ -1,4 +1,4 @@
-ANSIBLE NGINX:
+DOCKER NGINX:
 
 sudo su -
 hostnamectl set-hostname docker.example.com
