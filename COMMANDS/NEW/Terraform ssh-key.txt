@@ -1,0 +1,73 @@
+Terraform ssh-key:
+
+
+data "aws_security_group" "previous-sg" {
+
+
+
+  id = "sg-0c4950e8841e59534" #existing security group id
+
+
+
+}
+ 
+#code for elastic ip
+
+
+
+resource "aws_eip" "hari-eip" {
+
+
+
+  instance = aws_instance.hari-server.id
+
+
+
+}
+
+
+
+#inject my ssh-key
+
+
+
+resource "aws_key_pair" "terra_key" {
+
+
+
+  key_name   = "terra.key"
+
+
+
+  public_key = ""
+
+
+
+}
+ 
+resource "aws_instance" "hari-server" {
+
+
+
+  ami                    = "ami-05ffe3c48a9991133"
+
+
+
+  availability_zone      = "us-east-1b"
+
+
+
+  instance_type          = "t2.micro"
+
+
+
+  key_name               = "terra.key"
+
+
+
+  vpc_security_group_ids = [data.aws_security_group.previous-sg.id]
+
+
+
+}
+ 
