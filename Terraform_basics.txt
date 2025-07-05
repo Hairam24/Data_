@@ -1,0 +1,171 @@
+create a instance :
+
+install terraform
+	(for amazon Linux)
+	sudo dnf install -y dnf-plugins-core
+ 	sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+	sudo dnf -y install terraform
+
+create a IAM user :
+	provide access to 
+		Admin full access
+		VPC full access
+		Ec2 full access
+	create a access key.
+
+install aws cli:
+
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+
+aws configure
+	(add the credentials)
+
+create a project directory:
+	mkdir /project
+	cd /project
+	vim ec2.tf
+	terraform init         (for initialization)
+	terraform fmt          (to make the order correct)
+	terraform validate     (to validate)
+	terraform plan         (for dry run)
+	terraform apply        (to run)
+	terraform destroy      (to delete)
+
+	vim service.tf
+	terraform init
+	terraform fmt
+	terraform validate
+	terraform plan
+	terraform apply
+	terraform destroy
+
+
+
+ec2.tf #################################################################################################################
+(terraform.io aws provider , aws_instance)
+
+provider "aws" {
+  region     = "us-east-1"
+  access_key = ""
+  secret_key = ""
+}
+
+
+
+resource "aws_instance" "web" {
+  ami           = "ami-05ffe3c48a9991133"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+
+
+service.tf ##############################################################################################################
+
+
+
+resource "aws_instance" "web-server" {
+
+  ami = "ami-05ffe3c48a9991133"
+
+  instance_type = "t2.micro"
+
+  key_name = "aws_Ltimindtree"
+
+  availability_zone = "us-east-1a"
+
+  vpc_security_group_ids = [aws_security_group.web-access.id]
+
+  tags = {
+
+    Name = "hello"
+
+  }
+
+}
+
+resource "aws_security_group" "web-access" {
+
+  name = "web-access"
+
+  description = "Allow access"
+
+  tags = {
+
+    Name = "web-acess"
+
+  }
+
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_http" {
+
+  security_group_id = aws_security_group.web-access.id
+
+  cidr_ipv4 = "0.0.0.0/0"
+
+  from_port = 80
+
+  ip_protocol = "tcp"
+
+  to_port = 80
+
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
+
+  security_group_id = aws_security_group.web-access.id
+
+  cidr_ipv4 = "0.0.0.0/0"
+
+  from_port = 22
+
+  ip_protocol = "tcp"
+
+  to_port = 22
+
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_443" {
+
+  security_group_id = aws_security_group.web-access.id
+
+  cidr_ipv4 = "0.0.0.0/0"
+
+  from_port = 443
+
+  ip_protocol = "tcp"
+
+  to_port = 443
+
+}
+
+resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
+
+  security_group_id = aws_security_group.web-access.id
+
+  cidr_ipv4 = "0.0.0.0/0"
+
+  ip_protocol = "-1"
+
+}
+
+
+###############################################################################################################################
+
+
+If we run the ec2 apply after it created and tag name is changed then , it only modify the tag name it won't create a new instance
+
+mv ec2.txt ec2.tf   (for rename the file or to move the file content)
+
+
+
+
+
+
