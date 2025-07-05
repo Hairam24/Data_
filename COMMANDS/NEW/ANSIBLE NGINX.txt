@@ -1,0 +1,31 @@
+ANSIBLE NGINX:
+
+sudo su -
+hostnamectl set-hostname docker.example.com
+bash
+yum install docker*
+systemctl restart docker
+systemctl enable docker
+docker info
+docker images
+
+yum install nginx -y
+systemctl start nginx.service
+systemctl status nginx.service
+docker pull nginx:stable-perl
+docker run -it --name my-web -p 8081:80 nginx /bin/bash
+
+IN NGINX:
+
+apt update -y
+apt install nginx
+service nginx start
+service nginx status
+
+
+EXTRAS:
+
+docker ps -a
+docker stop DOCKER_ID    (To stop the container running)
+docker remove DOCKER_ID  (To delete the container)
+docker attach DOCKER_ID  (To access the container)
