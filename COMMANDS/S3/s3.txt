@@ -1,0 +1,54 @@
+ yum update -y
+    2  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    3  unzip awscliv2.zip
+    4  sudo ./aws/install
+    5  yum install python* -y
+    6  aws --version
+    7  aws configure
+    8  ll
+    9  history
+   10  cd .aws/
+   11  ls
+   12  cat config
+   13  cat credientials
+   14  cat credentials
+   15  sudo yum
+   16  ll
+   17  cd
+   18  ll
+   19  sudo yum
+   20  ll
+   21  sudo yum install automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
+   22  git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+   23  ll
+   24  ./autogen.sh
+   25  cd aws
+   26  ./autogen.sh
+   27  cd ./autogen.sh
+   28  cd
+   29  cd s3fs-fuse/
+   30  ./autogen.sh
+   31  ./configure --prefix=/usr --with-openssl
+   32  make
+   33  make install
+   34  sudo make install
+   35  make install
+   36  s3fs
+   37  verify pkg
+   38  touch /etc/passwd-s3fs
+   39  vim /etc/passwd-s3fs
+   40  sudo chmod 640 /etc/passwd-s3fs
+   41  s3fs devops2003 /mnt -o passwd_file=/etc/passwd-s3fs
+   42  df -h
+   43  s3fs -o iam_role="s3role" -o url="https://s3-ap-south-1.amazonaws.com" -o endpoint=ap-south-1 -o dbglevel=info -o curldbg -o allow_other -o use_cache=/tmp sanjaynetwork /var/s3fs-demofs
+   44  cd /mnt
+   45  ll
+   46  history
+   47  ll
+   48  cd
+   49  vim hari.txt
+   50  cd
+   51  cd /mnt
+   52  vim love.txt
+   53  ll
+   54  history
